@@ -18,7 +18,8 @@ import PageHeader from "./components/page-header";
 import { classNames, getTextContent, getListNumber } from "./utils";
 
 export const createRenderChildText = (
-  customDecoratorComponents?: CustomDecoratorComponents
+  customDecoratorComponents?: CustomDecoratorComponents,
+  blockMap?: BlockMapType
 ) => (properties: DecorationType[]) => {
   return properties?.map(([text, decorations], i) => {
     if (!decorations) {
@@ -70,6 +71,7 @@ export const createRenderChildText = (
         return (
           <CustomComponent
             key={i}
+            blockMap={blockMap}
             {...(props as any)}
             renderComponent={renderText}
           >
@@ -112,7 +114,10 @@ export const Block: React.FC<Block> = props => {
   const blockValue = block?.value;
 
   const renderComponent = () => {
-    const renderChildText = createRenderChildText(customDecoratorComponents);
+    const renderChildText = createRenderChildText(
+      customDecoratorComponents,
+      blockMap
+    );
 
     switch (blockValue?.type) {
       case "page":

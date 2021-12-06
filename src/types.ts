@@ -69,6 +69,7 @@ type DateFormatType = [
 ];
 type UserFormatType = ["u", string];
 type PageFormatType = ["p", string];
+type ExternalObjectInstanceFormatType = ["eoi", string];
 type SubDecorationType =
   | BoldFormatType
   | ItalicFormatType
@@ -78,7 +79,8 @@ type SubDecorationType =
   | ColorFormatType
   | DateFormatType
   | UserFormatType
-  | PageFormatType;
+  | PageFormatType
+  | ExternalObjectInstanceFormatType;
 type BaseDecorationType = [string];
 type AdditionalDecorationType = [string, SubDecorationType[]];
 export type DecorationType = BaseDecorationType | AdditionalDecorationType;
@@ -368,6 +370,7 @@ export type CustomDecoratorComponentProps<
   : {
       decoratorValue: SubDecorationValue<T>;
     }) & {
+  blockMap?: BlockMapType;
   renderComponent: () => JSX.Element | null;
 };
 
